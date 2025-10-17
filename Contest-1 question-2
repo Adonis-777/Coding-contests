@@ -1,0 +1,38 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    map<pair<int, int>, int> coordCount;
+
+
+    for (int i = 0; i < n; ++i) {
+        int x, y;
+        cin >> x >> y;
+        coordCount[{x, y}]++;
+    }
+
+    vector<pair<int, int>> duplicates;
+
+      for (const auto& entry : coordCount) {
+        if (entry.second > 1) {
+            duplicates.push_back(entry.first);
+        }
+    }
+
+   
+    sort(duplicates.begin(), duplicates.end());
+
+   
+    for (const auto& p : duplicates) {
+        cout << p.first << " " << p.second << endl;
+    }
+
+    return 0;
+}
