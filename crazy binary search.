@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+bool check(int key, vector<int> a, int no_of_cows){
+    
+    int count = 1;
+    int last_pos = a[0];
+    int n = a.size();
+    
+    for(int i = 0; i < n; i++){
+        if (a[i] - last_pos >= key) {
+            count++;
+            last_pos = a[i];
+        }
+        
+    }
+    
+    return (count >= no_of_cows);
+}
+
+
+void helper(vector<int> a, int no_of_cows){
+    
+    sort(a.begin(), a.end());
+    int l = 0, h = a.size() - 1;
+    
+    while(h - l > 1){
+        int mid = l + (h - l) / 2;
+        
+        if(check(mid, a, no_of_cows)){
+            l = mid;
+        }
+        else{
+            h = mid - 1;
+        }
+    }
+    
+    cout << l << endl;
+}
+
+
+int main(){
+    
+    int n, c;
+    cin >> n >> c;
+    
+    vector<int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+    
+    
+    helper(a, c);
+}
